@@ -98,4 +98,5 @@ export enum TorStatus {
     Enabling = 'Enabling',
     Disabling = 'Disabling',
     Enabled = 'Enabled',
+    Error = 'Error',
 }

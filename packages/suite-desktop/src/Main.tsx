@@ -23,7 +23,7 @@ import RouterHandler from '@suite-support/Router';
 import { ConnectedThemeProvider } from '@suite-support/ConnectedThemeProvider';
 import { LoadingScreen } from '@suite-support/screens/LoadingScreen';
 import { ErrorScreen } from '@suite-support/screens/ErrorScreen';
-import { ModulesLoadingScreen } from './support/screens/ModulesLoadingScreen';
+import { TorLoadingScreen } from './support/screens/TorLoadingScreen';
 import history from '@suite/support/history';
 import AppRouter from './support/Router';
 import DesktopUpdater from './support/DesktopUpdater';
@@ -71,15 +71,20 @@ export const init = async (root: HTMLElement) => {
     const preloadAction = await preloadStore();
     const store = initStore(preloadAction);
 
-    await desktopApi.handshake();
+    const handshakeResponse = await desktopApi.handshake();
+    const { torSettings } = handshakeResponse;
 
-    // render more complex interactive loader with theme provider without redux
-    render(<ModulesLoadingScreen />, root);
+    render(<TorLoadingScreen torSettings={torSettings} />, root);
 
-    // start loading desktop modules, handle progress in <ModulesLoadingScreen />
+    const loadTorModule = await desktopApi.loadTor(null);
+    if (!loadTorModule.success) {
+        await new Promise(resolve => {
+            render(<TorLoadingScreen torSettings={torSettings} callback={resolve} />, root);
+        });
+    }
+
     const loadModules = await desktopApi.loadModules(null);
     if (!loadModules.success) {
-        // loading failed, render error with theme provider without redux and do not continue
         render(<ErrorScreen error={loadModules.error} />, root);
         return;
     }

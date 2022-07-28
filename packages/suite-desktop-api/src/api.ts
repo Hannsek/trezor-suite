@@ -8,6 +8,8 @@ import {
     UpdateProgress,
     InvokeResult,
     BootstrapTorEvent,
+    InitialHandShakeClient,
+    HandsakeTorLoad,
 } from './messages';
 
 // Event messages from renderer to main process
@@ -58,8 +60,9 @@ export interface RendererChannels {
 // Sent by DesktopApi.[method] via ipcRenderer.invoke (./main)
 // Handled by ipcMain.handle (see packages/suite-desktop/src-electron/modules/*)
 export interface InvokeChannels {
-    'handshake/client': () => void;
+    'handshake/client': () => InitialHandShakeClient;
     'handshake/load-modules': (payload: HandshakeClient) => InvokeResult<HandshakeElectron>;
+    'handshake/load-tor': (payload: HandshakeClient) => HandsakeTorLoad;
     'metadata/read': (options: { file: string }) => InvokeResult<string>;
     'metadata/write': (options: { file: string; content: string }) => InvokeResult;
     'server/request-address': (route: string) => string | undefined;
@@ -94,6 +97,7 @@ export interface DesktopApi {
     // Handshake
     handshake: DesktopApiInvoke<'handshake/client'>;
     loadModules: DesktopApiInvoke<'handshake/load-modules'>;
+    loadTor: DesktopApiInvoke<'handshake/load-tor'>;
     // Metadata
     metadataWrite: DesktopApiInvoke<'metadata/write'>;
     metadataRead: DesktopApiInvoke<'metadata/read'>;
