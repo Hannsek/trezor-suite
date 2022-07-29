@@ -198,6 +198,12 @@ const routes = [
         params: walletParams,
     },
     {
+        name: 'wallet-coinmarket-p2p',
+        pattern: '/accounts/coinmarket/p2p',
+        app: 'wallet',
+        params: walletParams,
+    },
+    {
         name: 'wallet-coinmarket-savings',
         pattern: '/accounts/coinmarket/savings',
         app: 'wallet',

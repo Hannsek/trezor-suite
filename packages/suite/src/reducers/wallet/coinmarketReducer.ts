@@ -18,6 +18,7 @@ import {
     COINMARKET_EXCHANGE,
     COINMARKET_COMMON,
     COINMARKET_SELL,
+    COINMARKET_P2P,
     COINMARKET_SAVINGS,
 } from '@wallet-actions/constants';
 import { STORAGE } from '@suite-actions/constants';
@@ -32,6 +33,7 @@ import type {
     SavingsTrade,
     SavingsTradePlannedPayment,
 } from '@suite-services/invityAPI';
+import { P2pInfo } from '@wallet-actions/coinmarketP2pActions';
 
 export interface ComposedTransactionInfo {
     composed?: Pick<
@@ -78,6 +80,10 @@ interface Sell {
     isFromRedirect: boolean;
 }
 
+interface P2p {
+    p2pInfo?: P2pInfo;
+}
+
 interface Savings {
     selectedProvider?: SavingsProviderInfo;
     savingsInfo?: SavingsInfo;
@@ -92,6 +98,7 @@ export interface State {
     buy: Buy;
     exchange: Exchange;
     sell: Sell;
+    p2p: P2p;
     savings: Savings;
     composedTransactionInfo: ComposedTransactionInfo;
     trades: Trade[];
@@ -133,6 +140,9 @@ export const initialState = {
         alternativeQuotes: [],
         transactionId: undefined,
         isFromRedirect: false,
+    },
+    p2p: {
+        p2pInfo: undefined,
     },
     savings: {
         selectedProvider: undefined,
@@ -249,6 +259,9 @@ const coinmarketReducer = (
                 break;
             case COINMARKET_SELL.SAVE_TRANSACTION_ID:
                 draft.sell.transactionId = action.transactionId;
+                break;
+            case COINMARKET_P2P.SAVE_P2P_INFO:
+                draft.p2p.p2pInfo = action.p2pInfo;
                 break;
             case COINMARKET_SAVINGS.SAVE_SAVINGS_INFO:
                 draft.savings.savingsInfo = action.savingsInfo;

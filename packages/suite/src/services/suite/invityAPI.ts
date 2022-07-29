@@ -1,33 +1,34 @@
 import { createHash } from 'crypto';
 import {
-    ExchangeListResponse,
-    ExchangeTradeQuoteResponse,
-    ExchangeTradeQuoteRequest,
-    ConfirmExchangeTradeRequest,
-    ExchangeTrade,
-    WatchExchangeTradeResponse,
-    ExchangeCoinInfo,
+    BankAccount,
     BuyListResponse,
+    BuyTrade,
+    BuyTradeFormResponse,
     BuyTradeQuoteRequest,
     BuyTradeQuoteResponse,
     BuyTradeRequest,
     BuyTradeResponse,
-    BuyTradeFormResponse,
-    BuyTrade,
-    WatchBuyTradeResponse,
+    ConfirmExchangeTradeRequest,
     CountryInfo,
-    SellListResponse,
-    SellVoucherTradeQuoteRequest,
-    SellVoucherTradeQuoteResponse,
-    SellVoucherTradeRequest,
-    SellVoucherTrade,
-    SellFiatTradeQuoteRequest,
+    ExchangeCoinInfo,
+    ExchangeListResponse,
+    ExchangeTrade,
+    ExchangeTradeQuoteRequest,
+    ExchangeTradeQuoteResponse,
+    P2pListResponse,
     SellFiatTrade,
+    SellFiatTradeQuoteRequest,
     SellFiatTradeQuoteResponse,
     SellFiatTradeRequest,
     SellFiatTradeResponse,
+    SellListResponse,
+    SellVoucherTrade,
+    SellVoucherTradeQuoteRequest,
+    SellVoucherTradeQuoteResponse,
+    SellVoucherTradeRequest,
+    WatchBuyTradeResponse,
+    WatchExchangeTradeResponse,
     WatchSellTradeResponse,
-    BankAccount,
 } from 'invity-api';
 import { isDesktop } from '@suite-utils/env';
 import type { InvityServerEnvironment, InvityServers } from '@wallet-types/invity';
@@ -574,6 +575,9 @@ class InvityAPI {
     private SELL_FIAT_CONFIRM = '/api/sell/fiat/confirm';
     private SELL_FIAT_WATCH_TRADE = '/api/sell/fiat/watch/{{counter}}';
 
+    private P2P_LIST = '/api/p2p/list';
+    // TODO: private P2P_QUOTES = '/api/p2p/quotes';
+
     private SAVINGS_LIST = '/api/savings/list';
     private SAVINGS_INIT = '/api/savings/trezor/init';
     private SAVINGS_TRADE = '/api/savings/trezor/trade';
@@ -923,6 +927,14 @@ class InvityAPI {
         } catch (error) {
             console.log('[watchSellFiatTrade]', error);
             return { error: error.toString() };
+        }
+    };
+
+    getP2pList = async (): Promise<P2pListResponse | undefined> => {
+        try {
+            return await this.request(this.P2P_LIST, {}, 'GET');
+        } catch (error) {
+            console.log('[getP2pList]', error);
         }
     };
 

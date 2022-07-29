@@ -24,6 +24,7 @@ import WalletCoinmarketExchange from '@wallet-views/coinmarket/exchange';
 import WalletCoinmarketExchangeDetail from '@wallet-views/coinmarket/exchange/detail';
 import WalletCoinmarketExchangeOffers from '@wallet-views/coinmarket/exchange/offers';
 import WalletCoinmarketSpend from '@wallet-views/coinmarket/spend';
+import WalletCoinmarketP2p from '@wallet-views/coinmarket/p2p';
 import WalletCoinmarketSavingsSetup from '@wallet-views/coinmarket/savings/setup';
 import WalletCoinmarketSavingsSetupContinue from '@wallet-views/coinmarket/savings/setup/continue';
 import WalletCoinmarketSavingsSetupWaiting from '@wallet-views/coinmarket/savings/setup/waiting';
@@ -58,6 +59,7 @@ const components: { [key: string]: React.ComponentType<any> } = {
     'wallet-coinmarket-exchange-detail': WalletCoinmarketExchangeDetail,
     'wallet-coinmarket-exchange-offers': WalletCoinmarketExchangeOffers,
     'wallet-coinmarket-spend': WalletCoinmarketSpend,
+    'wallet-coinmarket-p2p': WalletCoinmarketP2p,
     'wallet-coinmarket-savings-setup': WalletCoinmarketSavingsSetup,
     'wallet-coinmarket-savings-setup-continue': WalletCoinmarketSavingsSetupContinue,
     'wallet-coinmarket-savings-setup-waiting': WalletCoinmarketSavingsSetupWaiting,

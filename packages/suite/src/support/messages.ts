@@ -890,6 +890,26 @@ export default defineMessages({
         defaultMessage: 'Pending',
         id: 'TR_BUY_STATUS_PENDING',
     },
+    TR_P2P_VALIDATION_ERROR_EMPTY: {
+        defaultMessage: 'Required',
+        id: 'TR_P2P_VALIDATION_ERROR_EMPTY',
+    },
+    TR_P2P_VALIDATION_ERROR_MINIMUM_FIAT: {
+        defaultMessage: 'Minimum is {minimum} {currency}',
+        id: 'TR_P2P_VALIDATION_ERROR_MINIMUM_FIAT',
+    },
+    TR_P2P_VALIDATION_ERROR_MAXIMUM_FIAT: {
+        defaultMessage: 'Maximum is {maximum} {currency}',
+        id: 'TR_P2P_VALIDATION_ERROR_MAXIMUM_FIAT',
+    },
+    TR_P2P_OFFERS_FOR: {
+        defaultMessage: 'Offers for',
+        id: 'TR_P2P_OFFERS_FOR',
+    },
+    TR_P2P_SHOW_OFFERS: {
+        defaultMessage: 'Show offers',
+        id: 'TR_P2P_SHOW_OFFERS',
+    },
     TR_SAVINGS_KYC_SUCCESS_NOTIFICATION: {
         defaultMessage: 'KYC verification was successful.',
         id: 'TR_SAVINGS_KYC_SUCCESS_NOTIFICATION',
@@ -4652,6 +4672,10 @@ export default defineMessages({
     TR_NAV_SELL: {
         id: 'TR_NAV_SELL',
         defaultMessage: 'Sell',
+    },
+    TR_NAV_P2P: {
+        id: 'TR_NAV_P2P',
+        defaultMessage: 'Peer-to-Peer',
     },
     TR_NAV_SAVINGS: {
         id: 'TR_NAV_SAVINGS',
