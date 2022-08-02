@@ -133,32 +133,33 @@ export const TorLoadingScreen = ({ callback, torSettings }: TorLoadingScreenProp
         }
     }, [callback]);
 
-    // We unsubscribe and subscribe again, to avoid memory leaks.
-    desktopApi.removeAllListeners('tor/bootstrap');
-    desktopApi.on('tor/bootstrap', (bootstrapEvent: BootstrapTorEvent) => {
-        if (torStatus === TorStatus.Disabling) return;
-        if (bootstrapEvent.type !== 'error') {
-            setError();
-        }
-        if (bootstrapEvent.type !== 'progress') return;
-        if (
-            bootstrapEvent &&
-            bootstrapEvent.type === 'progress' &&
-            bootstrapEvent.progress &&
-            bootstrapEvent.progress.current
-        ) {
-            setProgress(bootstrapEvent.progress.current);
-            if (bootstrapEvent.progress.current === bootstrapEvent.progress.total) {
-                desktopApi.removeAllListeners('tor/bootstrap');
-                setTorStatus(TorStatus.Enabled);
-                if (callback) {
-                    callback();
-                }
-            } else {
-                setTorStatus(TorStatus.Enabling);
+    useEffect(() => {
+        desktopApi.on('tor/bootstrap', (bootstrapEvent: BootstrapTorEvent) => {
+            if (torStatus === TorStatus.Disabling) return;
+            if (bootstrapEvent.type !== 'error') {
+                setError();
             }
-        }
-    });
+            if (bootstrapEvent.type !== 'progress') return;
+            if (
+                bootstrapEvent &&
+                bootstrapEvent.type === 'progress' &&
+                bootstrapEvent.progress &&
+                bootstrapEvent.progress.current
+            ) {
+                setProgress(bootstrapEvent.progress.current);
+                if (bootstrapEvent.progress.current === bootstrapEvent.progress.total) {
+                    desktopApi.removeAllListeners('tor/bootstrap');
+                    setTorStatus(TorStatus.Enabled);
+                    if (callback) {
+                        callback();
+                    }
+                } else {
+                    setTorStatus(TorStatus.Enabling);
+                }
+            }
+        });
+        return () => desktopApi.removeAllListeners('tor/bootstrap');
+    }, [torStatus, callback]);
 
     let message = 'Enabling TOR';
     if (torStatus === TorStatus.Error) {
