@@ -34,7 +34,7 @@ export type HandshakeEvent =
           message: string;
       };
 
-export type HandsakeTorLoad =
+export type HandshakeTorLoad =
     | {
           success: true;
       }

@@ -9,7 +9,7 @@ import {
     InvokeResult,
     BootstrapTorEvent,
     InitialHandShakeClient,
-    HandsakeTorLoad,
+    HandshakeTorLoad,
 } from './messages';
 
 // Event messages from renderer to main process
@@ -62,7 +62,7 @@ export interface RendererChannels {
 export interface InvokeChannels {
     'handshake/client': () => InitialHandShakeClient | void;
     'handshake/load-modules': (payload: HandshakeClient) => InvokeResult<HandshakeElectron>;
-    'handshake/load-tor': (payload: HandshakeClient) => HandsakeTorLoad;
+    'handshake/load-tor': (payload: HandshakeClient) => HandshakeTorLoad;
     'metadata/read': (options: { file: string }) => InvokeResult<string>;
     'metadata/write': (options: { file: string; content: string }) => InvokeResult;
     'server/request-address': (route: string) => string | undefined;
