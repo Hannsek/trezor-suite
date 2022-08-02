@@ -45,7 +45,7 @@ export type HandshakeTorLoad =
 
 export type HandshakeClient = any;
 
-export type InitialHandShakeClient = {
+export type InitialHandshakeClient = {
     torSettings: {
         running: boolean;
         address: string;
