@@ -207,7 +207,7 @@ export const TorLoadingScreen = ({ callback, torSettings }: TorLoadingScreenProp
 
     return (
         <ThemeProvider>
-            <Wrapper>
+            <Wrapper data-test="@tor-loading-screen">
                 <ModalWindow>
                     <MessageWrapper>
                         <Image width={130} height={130} image="TOR_ENABLING" />
@@ -236,6 +236,7 @@ export const TorLoadingScreen = ({ callback, torSettings }: TorLoadingScreenProp
                                     e.stopPropagation();
                                     disableTor();
                                 }}
+                                data-test="@tor-loading-screen/disable-button"
                             >
                                 Disable TOR
                             </DisableButton>
@@ -250,6 +251,7 @@ export const TorLoadingScreen = ({ callback, torSettings }: TorLoadingScreenProp
                                     e.stopPropagation();
                                     tryAgain();
                                 }}
+                                data-test="@tor-loading-screen/try-again-button"
                             >
                                 Try Again
                             </Button>

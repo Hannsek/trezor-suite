@@ -26,7 +26,7 @@ export const Tor = () => {
         <SectionItem data-test="@settings/tor" ref={anchorRef} shouldHighlight={shouldHighlight}>
             <TextColumn
                 title={
-                    <LoadingContent isLoading={isTorLoading}>
+                    <LoadingContent isLoading={isTorLoading} dataTestBase="@settings/tor">
                         <Translation id="TR_TOR_TITLE" />
                     </LoadingContent>
                 }

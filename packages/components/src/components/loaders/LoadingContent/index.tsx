@@ -11,9 +11,12 @@ const LoadingWrapper = styled.div`
 export type LoadingContentProps = {
     isLoading?: boolean;
     size?: number;
+    dataTestBase?: string;
 };
 
-const LoaderCell = styled.div<Required<LoadingContentProps>>`
+type LoaderCellProps = Required<Omit<LoadingContentProps, 'dataTestBase'>>;
+
+const LoaderCell = styled.div<LoaderCellProps>`
     width: ${({ size }) => 1.5 * size}px;
     transition: all 0.25s ease-out 0.5s;
     svg {
@@ -31,10 +34,18 @@ export const LoadingContent: React.FC<LoadingContentProps> = ({
     children,
     isLoading = false,
     size = 20,
+    dataTestBase,
 }) => (
     <LoadingWrapper>
         <LoaderCell isLoading={isLoading} size={size}>
-            {isLoading ? <Loader size={size} /> : <Icon icon="CHECK" size={size} />}
+            {isLoading ? (
+                <Loader
+                    size={size}
+                    data-test={dataTestBase ? `${dataTestBase}/loader` : undefined}
+                />
+            ) : (
+                <Icon icon="CHECK" size={size} />
+            )}
         </LoaderCell>
         {children}
     </LoadingWrapper>
