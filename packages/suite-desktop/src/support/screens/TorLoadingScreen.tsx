@@ -209,7 +209,7 @@ export const TorLoadingScreen = ({ callback, torSettings }: TorLoadingScreenProp
             <Wrapper>
                 <ModalWindow>
                     <MessageWrapper>
-                        <Image width={130} height={130} image="TOR_ENABELING" />
+                        <Image width={130} height={130} image="TOR_ENABLING" />
                         <Text>{message}</Text>
                     </MessageWrapper>
 
