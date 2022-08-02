@@ -13,7 +13,9 @@ import * as store from './libs/store';
 import { MIN_HEIGHT, MIN_WIDTH } from './libs/screen';
 import { getBuildInfo, getComputerInfo } from './libs/info';
 import { restartApp } from './libs/app-utils';
-import { initModules, initTorModule } from './modules';
+import { initModules } from './modules';
+import initTor from './modules/tor';
+
 import { createInterceptor } from './libs/request-interceptor';
 import { hangDetect } from './hang-detect';
 import { createLogger } from './logger';
@@ -163,24 +165,29 @@ const init = async () => {
 
     // We create a Tor init separated from general `initModules` because Tor is different
     // since we want to allow it to fail and then the user decides wether to `try again` or `disable`.
-    const loadTor = await initTorModule({
-        mainWindow,
-        store,
-        interceptor,
-    });
 
     // create handler for handshake/load-tor
     const loadTorResponse = (clientData: HandshakeClient) => {
-        if (!loadTor) {
-            return Promise.resolve({ success: false, error: 'Tor failed to load' });
+        const torModule = initTor({
+            mainWindow,
+            store,
+            interceptor,
+        });
+        if (!torModule) throw new Error('Could not initialize tor');
+        try {
+            return torModule(clientData)
+                .then(() => {
+                    logger.debug('modules', 'loaded tor');
+                    return { success: true };
+                })
+                .catch((error: Error) => ({ success: false as const, error: error.message }));
+        } catch (error) {
+            logger.error('modules', `Couldn't load tor (${error.toString()})`);
+            throw error;
         }
-
-        return loadTor(clientData)
-            .then(() => ({ success: true }))
-            .catch(err => ({ success: false as const, error: err.message }));
     };
 
-    ipcMain.handle('handshake/load-tor', (_, payload) => loadTorResponse(payload));
+    ipcMain.handleOnce('handshake/load-tor', (_, payload) => loadTorResponse(payload));
 
     // load and wait for handshake message from renderer
     const handshake = await hangDetect(mainWindow);
