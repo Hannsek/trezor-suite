@@ -30,6 +30,7 @@ import DesktopUpdater from './support/DesktopUpdater';
 import { SENTRY_CONFIG } from '@suite/config/suite';
 import { ModalContextProvider } from '@suite-support/ModalContext';
 import { desktopHandshake } from '@suite-actions/suiteActions';
+import { createDeferred } from '@trezor/utils';
 
 const Main = () => {
     useTor();
@@ -78,9 +79,9 @@ export const init = async (root: HTMLElement) => {
 
     const loadTorModule = await desktopApi.loadTor(null);
     if (!loadTorModule.success) {
-        await new Promise(resolve => {
-            render(<TorLoadingScreen torSettings={torSettings} callback={resolve} />, root);
-        });
+        const { resolve, promise } = createDeferred();
+        render(<TorLoadingScreen torSettings={torSettings} callback={resolve} />, root);
+        await promise;
     }
 
     const loadModules = await desktopApi.loadModules(null);
