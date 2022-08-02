@@ -16,7 +16,6 @@ class TorProcess extends BaseProcess {
     controlPort: number;
     torHost: string;
     authFilePath: string;
-    bootstrap = { progress: '', summary: '' };
 
     constructor(options: TorConnectionOptions) {
         super('tor', 'tor');
