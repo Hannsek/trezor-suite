@@ -11,4 +11,5 @@ export * from './settingsUtils';
 export * from './transactionUtils';
 export * from './cardanoUtils';
 export * from './exportTransactions';
+export * from './formatCurrencyAmount';
 export { analyzeTransactions as analyzeTransactionsFixtures } from './__fixtures__/transactionUtils';
