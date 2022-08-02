@@ -29,25 +29,28 @@ export const fetchAndUpdateAccount =
 
         try {
             const api = CoinjoinBackendService.getInstance(account.symbol);
-            const accountInfo = await api.getAccountInfo({
-                descriptor: account.descriptor,
-                lastKnownState: {
-                    balance: account.balance,
-                    blockHash: lastKnownState.blockHash,
+            const accountInfo = await api.getAccountInfo(
+                {
+                    descriptor: account.descriptor,
+                    lastKnownState: {
+                        balance: account.balance,
+                        blockHash: lastKnownState.blockHash,
+                    },
                 },
-                onProgress: (progressState: any) => {
+                ({ blockHash = 'ěěě', progress, progressMessage }) => {
                     dispatch(
                         updateAccount({
                             ...account,
                             lastKnownState: {
-                                ...progressState,
+                                blockHash,
+                                progress,
+                                progressMessage,
                                 time: Date.now(),
                             },
                         }),
                     );
                 },
-                symbol: account.symbol,
-            });
+            );
 
             if (accountInfo) {
                 // get fresh info from reducer
