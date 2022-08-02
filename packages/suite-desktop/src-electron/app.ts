@@ -161,6 +161,8 @@ const init = async () => {
     // repeated during app lifecycle (e.g. Ctrl+R)
     ipcMain.handle('handshake/load-modules', (_, payload) => loadModulesResponse(payload));
 
+    // We create a Tor init separated from general `initModules` because Tor is different
+    // since we want to allow it to fail and then the user decides wether to `try again` or `disable`.
     const loadTor = await initTorModule({
         mainWindow,
         store,
