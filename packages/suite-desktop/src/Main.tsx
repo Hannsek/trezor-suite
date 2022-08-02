@@ -73,15 +73,19 @@ export const init = async (root: HTMLElement) => {
     const store = initStore(preloadAction);
 
     const handshakeResponse = await desktopApi.handshake();
-    const { torSettings } = handshakeResponse;
+    const torSettings = handshakeResponse?.torSettings;
 
-    render(<TorLoadingScreen torSettings={torSettings} />, root);
+    // When handshake does not returns `torSettings` it means it has been reloaded (e.g. Ctrl+R)
+    // so there is not need to handle Tor loading again.
+    if (torSettings) {
+        render(<TorLoadingScreen torSettings={torSettings} />, root);
 
-    const loadTorModule = await desktopApi.loadTor(null);
-    if (!loadTorModule.success) {
-        const { resolve, promise } = createDeferred();
-        render(<TorLoadingScreen torSettings={torSettings} callback={resolve} />, root);
-        await promise;
+        const loadTorModule = await desktopApi.loadTor(null);
+        if (!loadTorModule.success) {
+            const { resolve, promise } = createDeferred();
+            render(<TorLoadingScreen torSettings={torSettings} callback={resolve} />, root);
+            await promise;
+        }
     }
 
     const loadModules = await desktopApi.loadModules(null);

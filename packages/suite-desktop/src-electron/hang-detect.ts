@@ -35,15 +35,14 @@ export const hangDetect = (mainWindow: BrowserWindow): Promise<HandshakeResult> 
         ipcMain.handleOnce('handshake/client', () => {
             clearTimeout(timeout);
             const torSettings = store.getTorSettings();
-            const initialHandShakeClient = {
-                torSettings,
-            };
 
             // always resolve repeated handshakes from renderer (e.g. Ctrl+R)
-            ipcMain.handle('handshake/client', () => Promise.resolve(initialHandShakeClient));
+            ipcMain.handle('handshake/client', () => Promise.resolve());
             resolve('success');
 
-            return Promise.resolve(initialHandShakeClient);
+            return Promise.resolve({
+                torSettings,
+            });
         });
         logger.debug('init', `Load URL (${APP_SRC})`);
         mainWindow.loadURL(APP_SRC);
