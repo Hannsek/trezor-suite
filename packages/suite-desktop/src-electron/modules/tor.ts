@@ -80,7 +80,6 @@ const load = async ({ mainWindow, store, interceptor }: Dependencies) => {
             );
             try {
                 await tor.start();
-                tor.torController.removeAllListeners();
             } catch (error) {
                 mainWindow.webContents.send('tor/bootstrap', {
                     type: 'error',
@@ -89,8 +88,9 @@ const load = async ({ mainWindow, store, interceptor }: Dependencies) => {
                 // When there is error does not mean that the process is stop,
                 // so we make sure to stop it so we are able to restart it.
                 tor.stop();
-                tor.torController.removeAllListeners();
                 throw error;
+            } finally {
+                tor.torController.removeAllListeners();
             }
         } else {
             setProxy('');
