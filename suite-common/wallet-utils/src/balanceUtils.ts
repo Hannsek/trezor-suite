@@ -1,6 +1,6 @@
 import BigNumber from 'bignumber.js';
 
-import { formatCurrencyAmount } from './formatCurrencyAmount';
+import { localizeNumber } from './localizeNumber';
 
 export const formatCoinBalance = (value: string, locale = 'en') => {
     const MAX_NUMBERS = 9;
@@ -24,13 +24,13 @@ export const formatCoinBalance = (value: string, locale = 'en') => {
         // indicate the dust
         const noDecimalsLeft = fixedBalanceBig.modulo(2).toFixed() === '0';
         if (noDecimalsLeft) {
-            return formatCurrencyAmount(fixedBalanceBig.toNumber(), locale, 2);
+            return localizeNumber(fixedBalanceBig.toNumber(), locale, 2);
         }
 
-        const localizedBalance = formatCurrencyAmount(fixedBalanceBig.toNumber(), locale);
+        const localizedBalance = localizeNumber(fixedBalanceBig.toNumber(), locale);
 
         return isTruncated ? `${localizedBalance}…` : localizedBalance;
     }
 
-    return formatCurrencyAmount(balanceBig.toNumber(), locale);
+    return localizeNumber(balanceBig.toNumber(), locale);
 };

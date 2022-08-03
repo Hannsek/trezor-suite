@@ -1,4 +1,4 @@
-export const formatCurrencyAmount = (amount: number, locale = 'en', decimals = 0): string => {
+export const localizeNumber = (amount: number, locale = 'en', decimals = 0): string => {
     if (
         typeof amount !== 'number' ||
         Number.isNaN(amount) ||

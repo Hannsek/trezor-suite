@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import { HiddenPlaceholder, Sign } from '@suite-components';
 import {
-    formatCurrencyAmount,
+    localizeNumber,
     networkAmountToSatoshi,
     formatCoinBalance,
 } from '@suite-common/wallet-utils';
@@ -77,7 +77,7 @@ export const FormattedCryptoAmount = ({
     if (isBalance) {
         formattedValue = formatCoinBalance(String(formattedValue), locale);
     } else {
-        formattedValue = formatCurrencyAmount(Number(formattedValue), locale);
+        formattedValue = localizeNumber(Number(formattedValue), locale);
     }
 
     // output as a string, mostly for compatability with graphs
