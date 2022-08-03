@@ -77,8 +77,8 @@
       - TEST_GROUP: "@group:fragile"
         CONTAINERS: "trezor-user-env-unix"
 
-suite web:
-  extends: .suite web base
+# suite web:
+#   extends: .suite web base
 
 suite web snapshots:
   extends: .suite web base
@@ -87,8 +87,8 @@ suite web snapshots:
     CYPRESS_SNAPSHOT: 1
     CYPRESS_updateSnapshots: 1
 
-suite web fragile:
-  extends: .suite web fragile base
+# suite web fragile:
+#   extends: .suite web fragile base
 
 suite web fragile snapshots:
   extends: .suite web fragile base
@@ -148,8 +148,8 @@ suite web 2-master manual:
 
 suite desktop:
   extends: .e2e desktop
-  only:
-    <<: *run_everything_rules
+  # only:
+  #   <<: *run_everything_rules
 
 suite desktop manual:
   extends: .e2e desktop
