@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styled, { ThemeProvider, StyleSheetManager } from 'styled-components';
 import { THEME } from '@trezor/components';
 
@@ -24,16 +24,8 @@ export const ReactWrapper = (props: Props) => {
         console.error('could not find shadow-root to mount react application');
     }
 
-    useEffect(() => {
-        console.log('mount react wrapper');
-        return () => {
-            // document.getElementById('react')?.remove();
-            console.log('unmount react wrapper');
-        };
-    });
-
     return (
-        // @ts-ignore. typings don't like using shadowRoot as target but it works
+        // @ts-expect-error. typings don't like using shadowRoot as target but it works
         <StyleSheetManager target={styleSlot.shadowRoot!}>
             <ThemeProvider theme={THEME.light}>
                 <View>{props.children}</View>
