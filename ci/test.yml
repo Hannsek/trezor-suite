@@ -145,9 +145,12 @@ suite web 2-master manual:
     paths:
       - ./packages/integration-tests/projects/suite-desktop/screenshots
   interruptible: true
+  # todo: can not run multiple jobs:
+  # ERROR: for docker_trezor-user-env-unix_1  Cannot create container for service trezor-user-env-unix:
+  # Conflict. The container name "/docker_trezor-user-env-unix_1" is already in use by container
   parallel:
     matrix:
-      - TEST_FILE: ["spawn-bridge", "spawn-tor"]
+      - TEST_FILE: ["spawn-bridge.test.js", "spawn-tor.test.js"]
 
 suite desktop:
   extends: .e2e desktop
