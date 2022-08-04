@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 import { DEVICE, TRANSPORT } from '@trezor/connect';
 import { SUITE, NOTIFICATION, MODAL } from '@suite-actions/constants';
-import { init as connectInit } from '@suite-actions/trezorConnectActions';
 import { DISCOVERY } from '@wallet-actions/constants';
 import { TorStatus } from '@suite-types';
 import * as suiteActions from '../suiteActions';
@@ -732,16 +731,6 @@ const observeSelectedDevice = [
 ];
 
 const acquireDevice = [
-    {
-        description: `prepare init pending`,
-        state: {},
-        result: connectInit.pending.type,
-    },
-    {
-        description: `prepare init fulfilled`,
-        state: {},
-        result: connectInit.fulfilled.type,
-    },
     {
         description: `success`,
         state: {
