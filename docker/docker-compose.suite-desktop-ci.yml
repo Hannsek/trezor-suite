@@ -8,9 +8,11 @@ services:
   test-run:
     image: registry.gitlab.com/satoshilabs/trezor/trezor-suite/base:latest
     container_name: desktop-test-runner
+    environment:
+      - TEST_FILE=$TEST_FILE
     ipc: host
     network_mode: service:trezor-user-env-unix
     working_dir: /trezor-suite
-    command: bash -c "yarn workspace @trezor/integration-tests test:desktop"
+    command: bash -c "yarn workspace @trezor/integration-tests test:desktop packages/integration-tests/projects/suite-desktop/tests/${TEST_FILE}"
     volumes:
       - ../:/trezor-suite
