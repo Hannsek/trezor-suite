@@ -1,0 +1,17 @@
+[
+    {
+        "ticker": "BTC",
+        "name": "Bitcoin",
+        "category": "Popular currencies"
+    },
+    {
+        "ticker": "ETH",
+        "name": "Ethereum",
+        "category": "Popular currencies"
+    },
+    {
+        "ticker": "LTC",
+        "name": "Litecoin",
+        "category": "Popular currencies"
+    }
+]
