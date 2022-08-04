@@ -166,7 +166,6 @@ const Inputs = () => {
                             )}
                         />
                     }
-                    data-test="@coinmarket/buy/fiat-input"
                 />
             </Left>
             <Middle responsiveSize="LG">

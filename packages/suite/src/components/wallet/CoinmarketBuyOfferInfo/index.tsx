@@ -144,7 +144,11 @@ const CoinmarketBuyOfferInfo = ({ selectedQuote, transactionId, providers, accou
                         <Translation id="TR_BUY_PROVIDER" />
                     </LeftColumn>
                     <RightColumn>
-                        <CoinmarketProviderInfo exchange={exchange} providers={providers} data-test=@CoinmarketProviderInfo/>
+                        <CoinmarketProviderInfo
+                            exchange={exchange}
+                            providers={providers}
+                            data-test="@CoinmarketProviderInfo"
+                        />
                     </RightColumn>
                 </Row>
                 <Row>
@@ -152,7 +156,10 @@ const CoinmarketBuyOfferInfo = ({ selectedQuote, transactionId, providers, accou
                         <Translation id="TR_BUY_PAID_BY" />
                     </LeftColumn>
                     <RightColumn>
-                        <CoinmarketPaymentType method={paymentMethod} data-test=@CoinmarketPaymentType/>
+                        <CoinmarketPaymentType
+                            method={paymentMethod}
+                            data-test="@CoinmarketPaymentType"
+                        />
                     </RightColumn>
                 </Row>
             </Info>

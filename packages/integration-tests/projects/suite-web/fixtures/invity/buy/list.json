@@ -7,22 +7,9 @@
             "companyName": "BTC Direct",
             "logo": "btcdirect-sandbox.png",
             "isActive": true,
-            "tradedCoins": [
-                "BCH",
-                "BTC",
-                "ETH",
-                "LTC",
-                "XRP"
-            ],
-            "tradedFiatCurrencies": [
-                "EUR"
-            ],
-            "supportedCountries": [
-                "AT",
-                "BE",
-                "BG",
-                "SL"
-            ],
+            "tradedCoins": ["BCH", "BTC", "ETH", "LTC", "XRP"],
+            "tradedFiatCurrencies": ["EUR"],
+            "supportedCountries": ["AT", "BE", "BG", "SL"],
             "paymentMethods": [
                 "bancontact",
                 "bankTransfer",
@@ -39,25 +26,9 @@
             "companyName": "Banxa",
             "logo": "banxa-sandbox.png",
             "isActive": true,
-            "tradedCoins": [
-                "BCH",
-                "BNB",
-                "BSV",
-                "BTC",
-                "XRP"
-            ],
-            "tradedFiatCurrencies": [
-                "AUD",
-                "CAD",
-                "SEK",
-                "USD"
-            ],
-            "supportedCountries": [
-                "DZ",
-                "AS",
-                "AD",
-                "AX"
-            ],
+            "tradedCoins": ["BCH", "BNB", "BSV", "BTC", "XRP"],
+            "tradedFiatCurrencies": ["AUD", "CAD", "SEK", "USD"],
+            "supportedCountries": ["DZ", "AS", "AD", "AX"],
             "paymentMethods": [
                 "poli",
                 "auspost",
