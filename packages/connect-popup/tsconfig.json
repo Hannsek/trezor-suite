@@ -5,9 +5,9 @@
         "types": ["web"]
     },
     "references": [
-        { "path": "../connect" },
         { "path": "../components" },
-        { "path": "../urls" }
+        { "path": "../connect" },
+        { "path": "../connect-ui" }
     ],
     "ts-node": {
         "compilerOptions": {

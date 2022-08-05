@@ -4,7 +4,7 @@ import { POPUP, ERRORS, PopupInit, CoreMessage, ConnectSettings } from '@trezor/
 import React from 'react';
 import * as ReactDOM from 'react-dom';
 
-import { ReactWrapper } from './react/support/ReactWrapper';
+import { ReactWrapper } from './react/ReactWrapper';
 
 export const header: HTMLElement = document.getElementsByTagName('header')[0];
 export const container: HTMLElement = document.getElementById('container')!;

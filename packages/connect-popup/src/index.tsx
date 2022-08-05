@@ -10,6 +10,7 @@ import {
     PopupInit,
     PopupHandshake,
 } from '@trezor/connect';
+import { Transport } from '@trezor/connect-ui';
 
 import * as view from './view';
 import {
@@ -24,8 +25,6 @@ import {
     showBridgeUpdateNotification,
     showBackupNotification,
 } from './view/notification';
-
-import { Transport } from './view/react/views/Transport';
 
 // browser built-in functionality to quickly and safely escape the string
 const escapeHtml = (payload: any) => {
